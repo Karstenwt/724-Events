@@ -11,7 +11,17 @@ const EventCard = ({
   label,
   small = false,
   ...props
-}) => (
+}) => {
+  if (!imageSrc || !title || !label) {
+    console.error("EventCard : données manquantes", {
+      imageSrc,
+      title,
+      label,
+    });
+    return null; // N'affiche rien si les données nécessaires manquent
+  }
+
+  return (
     <div
       data-testid="card-testid"
       className={`EventCard${small ? " EventCard--small" : ""}`}
@@ -27,6 +37,7 @@ const EventCard = ({
       </div>
     </div>
   );
+};
 
 EventCard.propTypes = {
   imageSrc: PropTypes.string.isRequired,
@@ -40,6 +51,6 @@ EventCard.propTypes = {
 EventCard.defaultProps = {
   imageAlt: "image",
   small: false,
-}
+};
 
 export default EventCard;
