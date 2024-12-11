@@ -8,24 +8,22 @@ const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
 
-  // Tri des événements par date ascendante (plus vieux au plus récent)
   const byDateAsc = data?.focus.sort(
     (evtA, evtB) => new Date(evtA.date) - new Date(evtB.date)
   );
 
-  // Défilement automatique
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % byDateAsc.length);
     }, 5000);
-    return () => clearInterval(interval); // Nettoyage de l'intervalle
+    return () => clearInterval(interval);
   }, [byDateAsc]);
 
   return (
     <div className="SlideCardList">
       {byDateAsc?.map((evt, idx) => (
         <div
-          key={evt.title} // Utilisation du titre comme clé
+          key={evt.title}
           className={`SlideCard SlideCard--${
             index === idx ? "display" : "hide"
           }`}
@@ -44,11 +42,11 @@ const Slider = () => {
         <div className="SlideCard__pagination">
           {byDateAsc?.map((evt, radioIdx) => (
             <input
-              key={`radio-${evt.title}`} // Clé basée sur un identifiant unique (titre)
+              key={`radio-${evt.title}`}
               type="radio"
               name="radio-button"
-              checked={radioIdx === index} // Vérifie si c'est l'index actif
-              onChange={() => setIndex(radioIdx)} // Mise à jour de l'index
+              checked={radioIdx === index}
+              onChange={() => setIndex(radioIdx)}
             />
           ))}
         </div>

@@ -7,37 +7,31 @@ import ModalEvent from "../ModalEvent";
 
 import "./style.css";
 
-const PER_PAGE = 9; // Nombre d'événements affichés par page
-
+const PER_PAGE = 9;
 const EventList = () => {
-  const { data, error } = useData(); // Récupère les données du contexte global
-  const [type, setType] = useState(); // État local pour stocker la catégorie sélectionnée
-  const [currentPage, setCurrentPage] = useState(1); // État local pour stocker la page actuelle
+  const { data, error } = useData();
+  const [type, setType] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // Filtrage des événements par catégorie et pagination
   const filteredEvents = (
-    (!type // Si aucune catégorie n'est sélectionnée
-      ? data?.events // Prend tous les événements
+    (!type
+      ? data?.events
       : data?.events.filter((event) => event.type === type)) || []
-  ) // Sinon, filtre par la catégorie sélectionnée
-    .filter((event, index) => {
-      // Pagination des événements
-      if (
-        (currentPage - 1) * PER_PAGE <= index && // Vérifie si l'événement appartient à la page actuelle
-        PER_PAGE * currentPage > index
-      ) {
-        return true;
-      }
-      return false;
-    });
+  ).filter((event, index) => {
+    if (
+      (currentPage - 1) * PER_PAGE <= index &&
+      PER_PAGE * currentPage > index
+    ) {
+      return true;
+    }
+    return false;
+  });
 
-  // Fonction pour changer la catégorie sélectionnée
   const changeType = (evtType) => {
-    setCurrentPage(1); // Réinitialise à la première page lors du changement de catégorie
-    setType(evtType); // Met à jour la catégorie sélectionnée
+    setCurrentPage(1);
+    setType(evtType);
   };
 
-  // Liste unique des catégories disponibles
   const typeList = new Set(data?.events.map((event) => event.type));
 
   return (
@@ -49,8 +43,8 @@ const EventList = () => {
         <>
           <h3 className="SelectTitle">Catégories</h3>
           <Select
-            selection={Array.from(typeList)} // Passe les catégories disponibles au composant Select
-            onChange={(value) => changeType(value)} // Applique le changement de catégorie via Select
+            selection={Array.from(typeList)}
+            onChange={(value) => changeType(value)}
           />
           <div id="events" className="ListContainer">
             {filteredEvents.map((event) => (
