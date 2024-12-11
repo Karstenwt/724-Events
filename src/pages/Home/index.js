@@ -13,12 +13,7 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const { data, last } = useData();
-
-  // Debugging : Ajout de logs pour vérifier les données récupérées.
-  console.log("Valeur de data :", data);
-  console.log("Valeur de events :", data?.events);
-  console.log("Valeur de last :", last);
+  const { last } = useData();
 
   return (
     <>
@@ -121,15 +116,8 @@ const Page = () => {
         <div className="col presta">
           <h3>Notre dernière prestation</h3>
 
-          {/* Debugging : Ajout d'un log pour vérifier les données transmises à EventCard */}
-          {console.log("Données transmises à EventCard :", {
-            imageSrc: last?.cover,
-            title: last?.title,
-            date: last?.date ? new Date(last.date) : null,
-            label: "boom",
-          })}
+          {/* Suppression du console.log dans les données transmises à EventCard */}
 
-          {/* Correction : Ajout de la condition pour vérifier si `last` contient des données valides */}
           {last && (
             <EventCard
               imageSrc={last.cover} // Utilisation des propriétés de `last` uniquement si elles existent

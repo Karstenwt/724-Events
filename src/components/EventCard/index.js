@@ -6,11 +6,11 @@ import "./style.scss";
 
 const EventCard = ({
   imageSrc,
-  imageAlt = "image", // Valeur par défaut
-  date = new Date(), // Valeur par défaut
+  imageAlt = "image",
+  date = new Date(),
   title,
   label,
-  small = false, // Valeur par défaut
+  small = false,
   ...props
 }) => {
   if (!imageSrc || !title || !label) {
@@ -19,7 +19,7 @@ const EventCard = ({
       title,
       label,
     });
-    return null; // N'affiche rien si les données nécessaires manquent
+    return null;
   }
 
   return (

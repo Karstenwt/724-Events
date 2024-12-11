@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 
 import "./style.scss";
 
-// Définir Arrow avant son utilisation
 const Arrow = () => (
   <svg
     width="21"
