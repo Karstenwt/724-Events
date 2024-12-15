@@ -116,11 +116,11 @@ const Page = () => {
         <div className="col presta">
           <h3>Notre dernière prestation</h3>
 
-          {/* Suppression du console.log dans les données transmises à EventCard */}
+          {}
 
           {last && (
             <EventCard
-              imageSrc={last.cover} // Utilisation des propriétés de `last` uniquement si elles existent
+              imageSrc={last.cover}
               title={last.title}
               date={new Date(last.date)}
               small

@@ -29,10 +29,10 @@ const Select = ({
   label = "",
   type = "normal",
 }) => {
-  const [value, setValue] = useState();
-  const [collapsed, setCollapsed] = useState(true);
+  const [value, setValue] = useState(); // 4.
+  const [collapsed, setCollapsed] = useState(true); // 2.
   const changeValue = (newValue) => {
-    onChange(newValue);
+    onChange(newValue); // 5.
     setValue(newValue);
     setCollapsed(newValue);
   };
@@ -42,24 +42,35 @@ const Select = ({
       {label && <div className="label">{label}</div>}
       <div className="Select">
         <ul>
-          <li className={collapsed ? "SelectTitle--show" : "SelectTitle--hide"}>
+          <li
+            className={collapsed ? "SelectTitle--show" : "SelectTitle--hide"}
+            onClick={() => setCollapsed(!collapsed)} // 1.
+          >
             {value || (!titleEmpty && "Toutes")}
           </li>
           {!collapsed && (
             <>
               {!titleEmpty && (
                 <li onClick={() => changeValue(null)}>
-                  <input defaultChecked={!value} name="selected" type="radio" />{" "}
+                  {" "}
+                  {/* 3 */}
+                  <input
+                    defaultChecked={!value}
+                    name="selected"
+                    type="radio"
+                  />{" "}
                   Toutes
                 </li>
               )}
               {selection.map((s) => (
                 <li key={s} onClick={() => changeValue(s)}>
+                  {" "}
+                  {/* 3 */}
                   <input
                     defaultChecked={value === s}
                     name="selected"
                     type="radio"
-                  />{" "}
+                  />
                   {s}
                 </li>
               ))}
@@ -73,7 +84,7 @@ const Select = ({
           className={collapsed ? "open" : "close"}
           onClick={(e) => {
             e.preventDefault();
-            setCollapsed(!collapsed);
+            setCollapsed(!collapsed); // 8.
           }}
         >
           <Arrow />

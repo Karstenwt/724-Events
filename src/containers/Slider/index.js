@@ -16,6 +16,7 @@ const Slider = () => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % byDateAsc.length);
     }, 5000);
+
     return () => clearInterval(interval);
   }, [byDateAsc]);
 

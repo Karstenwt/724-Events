@@ -31,9 +31,7 @@ export const DataProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (data) {
-      return;
-    }
+    if (data) return;
     getData();
   }, [data, getData]);
 
